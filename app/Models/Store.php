@@ -26,7 +26,7 @@ class Store extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function storeBallance()
+    public function storeBalance()
     {
         return $this->hasOne(StoreBalance::class);
     }

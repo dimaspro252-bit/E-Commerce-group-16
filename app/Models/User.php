@@ -62,7 +62,7 @@ class User extends Authenticatable
     // Cek apakah user adalah seller (punya store yang verified)
     public function isSeller()
     {
-        return $this->store()->exists() && $this->store->is_verified;
+        return $this->store && $this->store->is_verified;
     }
     // relationships can hava one store 
     public function store()

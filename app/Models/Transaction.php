@@ -46,4 +46,14 @@ class Transaction extends Model
     {
         return $this->hasMany(ProductReview::class);
     }
+    
+    public function isPaid()
+    {
+        return $this->payment_status === 'paid';
+    }
+
+    public function isUnpaid()
+    {
+        return $this->payment_status === 'unpaid';
+    }
 }

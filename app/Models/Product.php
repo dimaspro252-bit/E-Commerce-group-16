@@ -45,4 +45,18 @@ class Product extends Model
     {
         return $this->hasMany(ProductReview::class);
     }
+
+    public function getThumbnailAttribute()
+    {
+        return $this->productImages()->where('is_thumbnail', true)->first()?->image;
+    }
+    public function scopeAvailable($query)
+    {
+        return $query->where('stock', '>', 0);
+    }
+
+    public function scopeByCategory($query, $categoryId)
+    {
+        return $query->where('product_category_id', $categoryId);
+    }
 }
