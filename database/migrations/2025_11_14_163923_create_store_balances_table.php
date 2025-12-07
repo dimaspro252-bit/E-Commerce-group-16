@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('store_balances', function (Blueprint $table) {
-            $table->id()->primary();
+            $table->id();
             $table->foreignId('store_id')->constrained()->cascadeOnDelete();
             $table->decimal('balance',26, 2);
             $table->timestamps();

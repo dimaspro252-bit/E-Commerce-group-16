@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('withdrawals', function (Blueprint $table) {
-            $table->id()->primary();
+            $table->id();
             $table->foreignId('store_balance_id')->constrained()->cascadeOnDelete();
             $table->decimal('amount', 26, 2);
             $table->string('bank_account_name');

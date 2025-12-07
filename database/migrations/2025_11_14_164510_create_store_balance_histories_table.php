@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('store_balance_histories', function (Blueprint $table) {
-            $table->id()->primary();
+            $table->id();
             $table->foreignId('store_balance_id')->constrained()->cascadeOnDelete();
             $table->enum('type', ['income', 'withdraw']);
             $table->uuid('reference_id');

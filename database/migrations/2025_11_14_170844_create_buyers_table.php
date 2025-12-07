@@ -13,7 +13,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('buyers', function (Blueprint $table) {
-            $table->id()->primary();
+            $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->string('profile_picture')->nullable();
             $table->string('phone_number')->nullable();
