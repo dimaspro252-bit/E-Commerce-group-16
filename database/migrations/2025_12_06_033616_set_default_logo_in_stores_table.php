@@ -6,23 +6,17 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::table('stores', function (Blueprint $table) {
-            //
+            $table->string('logo')->default('stores/default-logo.png')->change();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::table('stores', function (Blueprint $table) {
-            //
+            $table->string('logo')->change();
         });
     }
 };
