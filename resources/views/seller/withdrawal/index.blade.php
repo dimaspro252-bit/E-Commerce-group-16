@@ -253,7 +253,7 @@
                                 required
                                 value="{{ old('bank_account_number', $lastWithdrawal->bank_account_number ?? '') }}"
                                 class="form-control @error('bank_account_number') error @enderror"
-                                placeholder="Bank account number">
+                                placeholder="1234 5678 9012 3456">
                             @error('bank_account_number')
                                 <div class="form-error">{{ $message }}</div>
                             @enderror
