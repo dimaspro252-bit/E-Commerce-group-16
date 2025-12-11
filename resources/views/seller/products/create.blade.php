@@ -339,7 +339,7 @@
                 <!-- Submit Buttons -->
                 <div class="flex gap-md">
                     <button type="submit" class="btn btn-primary btn-lg">
-                        💾 Save Product
+                        Save Product
                     </button>
                     <a href="{{ route('seller.products.index') }}" class="btn btn-outline btn-lg">
                         Cancel

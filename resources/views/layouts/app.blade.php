@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'DrizStuff - Your Trusted Marketplace')</title>
-    
+
     <!-- CSS Files -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('css/homepage.css') }}">
@@ -12,6 +13,7 @@
     <link rel="stylesheet" href="{{ asset('css/navbar.css') }}">
     @stack('styles')
 </head>
+
 <body>
     <!-- Navbar -->
     <nav class="navbar">
@@ -26,13 +28,13 @@
                 <div class="navbar-search">
                     <form action="{{ route('home') }}" method="GET">
                         <div class="search-input-wrapper">
-                            <input type="text" 
-                                   name="search" 
-                                   placeholder="Search products..." 
-                                   value="{{ request('search') }}"
-                                   class="navbar-search-input">
+                            <input type="text"
+                                name="search"
+                                placeholder="Search products..."
+                                value="{{ request('search') }}"
+                                class="navbar-search-input">
                             <button type="submit" class="navbar-search-btn">
-                                🔍
+                                Cari
                             </button>
                         </div>
                     </form>
@@ -41,68 +43,68 @@
                 <!-- Navigation Links -->
                 <div class="navbar-links">
                     <a href="{{ route('home') }}" class="nav-link">
-                        🏠 Home
+                        Home
                     </a>
 
                     @auth
-                        <!-- Cart -->
-                        <a href="{{ route('cart.index') }}" class="nav-link cart-link">
-                            🛒 Cart
-                            @if(session('cart') && count(session('cart')) > 0)
-                                <span class="cart-badge">{{ count(session('cart')) }}</span>
+                    <!-- Cart -->
+                    <a href="{{ route('cart.index') }}" class="nav-link cart-link">
+                        Cart
+                        @if(session('cart') && count(session('cart')) > 0)
+                        <span class="cart-badge">{{ count(session('cart')) }}</span>
+                        @endif
+                    </a>
+
+                    <!-- Transactions -->
+                    <a href="{{ route('transactions.index') }}" class="nav-link">
+                        Orders
+                    </a>
+
+                    <!-- Dropdown Menu -->
+                    <div class="navbar-dropdown">
+                        <button class="nav-link dropdown-toggle">
+                            👤 {{ Auth::user()->name }}
+                        </button>
+                        <div class="dropdown-menu">
+                            <a href="{{ route('profile.edit') }}" class="dropdown-item">
+                                ⚙️ Profile
+                            </a>
+
+                            @if(Auth::user()->isAdmin())
+                            <a href="{{ route('admin.dashboard') }}" class="dropdown-item">
+                                🔧 Admin Dashboard
+                            </a>
                             @endif
-                        </a>
 
-                        <!-- Transactions -->
-                        <a href="{{ route('transactions.index') }}" class="nav-link">
-                            📦 Orders
-                        </a>
-
-                        <!-- Dropdown Menu -->
-                        <div class="navbar-dropdown">
-                            <button class="nav-link dropdown-toggle">
-                                👤 {{ Auth::user()->name }}
-                            </button>
-                            <div class="dropdown-menu">
-                                <a href="{{ route('profile.edit') }}" class="dropdown-item">
-                                    ⚙️ Profile
-                                </a>
-
-                                @if(Auth::user()->isAdmin())
-                                    <a href="{{ route('admin.dashboard') }}" class="dropdown-item">
-                                        🔧 Admin Dashboard
+                            @if(!Auth::user()->isAdmin())
+                                @if(Auth::user()->store)
+                                    <a href="{{ route('seller.dashboard') }}" class="dropdown-item">
+                                        🏪 Seller Dashboard
+                                    </a>
+                                @else
+                                    <a href="{{ route('seller.register') }}" class="dropdown-item">
+                                        🎯 Become a Seller
                                     </a>
                                 @endif
+                            @endif
 
-                                @if(!Auth::user()->isAdmin())
-                                    @if(Auth::user()->store)
-                                        <a href="{{ route('seller.dashboard') }}" class="dropdown-item">
-                                            🏪 Seller Dashboard
-                                        </a>
-                                    @else
-                                        <a href="{{ route('seller.register') }}" class="dropdown-item">
-                                            🎯 Become a Seller
-                                        </a>
-                                    @endif
-                                @endif
+                            <hr class="dropdown-divider">
 
-                                <hr class="dropdown-divider">
-
-                                <form method="POST" action="{{ route('logout') }}">
-                                    @csrf
-                                    <button type="submit" class="dropdown-item text-danger">
-                                        🚪 Logout
-                                    </button>
-                                </form>
-                            </div>
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <button type="submit" class="dropdown-item text-danger">
+                                    🚪 Logout
+                                </button>
+                            </form>
                         </div>
+                    </div>
                     @else
-                        <a href="{{ route('login') }}" class="btn btn-outline btn-sm">
-                            Login
-                        </a>
-                        <a href="{{ route('register') }}" class="btn btn-primary btn-sm">
-                            Register
-                        </a>
+                    <a href="{{ route('login') }}" class="btn btn-outline btn-sm">
+                        Login
+                    </a>
+                    <a href="{{ route('register') }}" class="btn btn-primary btn-sm">
+                        Register
+                    </a>
                     @endauth
                 </div>
 
@@ -116,35 +118,35 @@
 
     <!-- Alert Messages -->
     @if(session('success'))
-        <div class="container mt-md">
-            <div class="alert alert-success">
-                ✅ {{ session('success') }}
-            </div>
+    <div class="container mt-md">
+        <div class="alert alert-success">
+            ✅ {{ session('success') }}
         </div>
+    </div>
     @endif
 
     @if(session('error'))
-        <div class="container mt-md">
-            <div class="alert alert-danger">
-                ❌ {{ session('error') }}
-            </div>
+    <div class="container mt-md">
+        <div class="alert alert-danger">
+            ❌ {{ session('error') }}
         </div>
+    </div>
     @endif
 
     @if(session('info'))
-        <div class="container mt-md">
-            <div class="alert alert-info">
-                ℹ️ {{ session('info') }}
-            </div>
+    <div class="container mt-md">
+        <div class="alert alert-info">
+            ℹ️ {{ session('info') }}
         </div>
+    </div>
     @endif
 
     @if(session('warning'))
-        <div class="container mt-md">
-            <div class="alert alert-warning">
-                ⚠️ {{ session('warning') }}
-            </div>
+    <div class="container mt-md">
+        <div class="alert alert-warning">
+            ⚠️ {{ session('warning') }}
         </div>
+    </div>
     @endif
 
     <!-- Main Content -->
@@ -160,7 +162,7 @@
                 <div class="footer-section">
                     <h3 class="footer-title">🛍️ DrizStuff</h3>
                     <p class="footer-text">
-                        Your trusted online marketplace for quality products. 
+                        Your trusted online marketplace for quality products.
                         Shop with confidence from verified sellers.
                     </p>
                     <div class="social-links">
@@ -244,4 +246,5 @@
 
     @stack('scripts')
 </body>
+
 </html>
