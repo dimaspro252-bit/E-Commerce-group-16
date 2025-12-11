@@ -76,14 +76,16 @@
                             </a>
                             @endif
 
-                            @if(Auth::user()->store)
-                            <a href="{{ route('seller.dashboard') }}" class="dropdown-item">
-                                🏪 Seller Dashboard
-                            </a>
-                            @else
-                            <a href="{{ route('seller.register') }}" class="dropdown-item">
-                                🎯 Become a Seller
-                            </a>
+                            @if(!Auth::user()->isAdmin())
+                                @if(Auth::user()->store)
+                                    <a href="{{ route('seller.dashboard') }}" class="dropdown-item">
+                                        🏪 Seller Dashboard
+                                    </a>
+                                @else
+                                    <a href="{{ route('seller.register') }}" class="dropdown-item">
+                                        🎯 Become a Seller
+                                    </a>
+                                @endif
                             @endif
 
                             <hr class="dropdown-divider">
